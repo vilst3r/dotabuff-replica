@@ -6,8 +6,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
-var users = require('./routes/users');
-var opendota = require("./routes/opendota");
 
 var app = express();
 
@@ -23,12 +21,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// routing
 app.use('/', index);
-app.use('/users', users);
-    
-// // all of our routes will be prefixed with /api
-// app.use('/api', router);
-app.use('/opendota', opendota);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
