@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var request = require('request');
 var rp = require('request-promise');
+var heroes = require('../controllers/heroes.js');
 
 var opendota_api_root = 'https://api.opendota.com/api';
 
@@ -12,15 +12,10 @@ router.get('/', function(req, res, next) {
 
 // routing a json response
 router.get('/heroes', function(req, res, next) {
-    // request.get(opendota_api_root + '/heroStats').pipe(test);
-    // request(opendota_api_root + '/heroStats', function(error, response, body) {
-      
-    // }).pipe(request(opendota_api_root));    
-    var test;
-    rp(opendota_api_root + '/heroStats').then(function(res) {
-        test = res;
+    rp(opendota_api_root + '/heroStats').then(function(response) {
+        var test = response;
+        heroes.listHeroes(test, req, res);
     });
-    console.log(test);
 });
 
 module.exports = router;
