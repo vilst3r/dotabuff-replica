@@ -18,4 +18,10 @@ router.get('/heroes', function(req, res, next) {
     });
 });
 
+router.get('/heroes/:hero', function(req, res, next) {
+    var id = req.params.hero
+    console.log(id);
+    console.log(req.url);
+})
+
 module.exports = router;

@@ -14,7 +14,6 @@ export default class heroGrid extends Component {
     return (
       <div>
         <div className = "panel-body">
-        {/*
         {
             this.state.heroes.sort(function(a, b) {
               return (a.localized_name < b.localized_name) ? -1 : (a.localized_name > b.localized_name) ? 1 : 0;
@@ -23,26 +22,7 @@ export default class heroGrid extends Component {
             
             this.state.heroes.map(function(item, key) {
                 return (
-                    <a>
-                        <div className="hero col-xs-4 col-sm-4 col-md-3 col-lg-2" style={{backgroundImage: 'url(' + 'https://api.opendota.com' + item.img + ')'}}>
-                            <div className="name"> { item.localized_name } </div>
-                        </div> 
-                    </a>
-                )                    
-            })
-            :
-            null
-        }
-        */}
-        {
-            this.state.heroes.sort(function(a, b) {
-              return (a.localized_name < b.localized_name) ? -1 : (a.localized_name > b.localized_name) ? 1 : 0;
-            }) 
-            ?
-            
-            this.state.heroes.map(function(item, key) {
-                return (
-                    <a>
+                    <a href={'heroes/' + item.localized_name }>
                         <div className="hero col-xs-4 col-sm-3 col-md-2 col-lg-1">
                             <img className="img-responsive" src = {'https://api.opendota.com' + item.img }/>
                             <div className="title"> { item.localized_name } </div>
