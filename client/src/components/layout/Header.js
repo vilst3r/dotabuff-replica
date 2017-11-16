@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import logo from '../images/logo.png';
-import '../css/App.css';
+import React from 'react';
+import logo from '../../images/logo.png';
+import './Header.css';
 
 // Header component
 const Header = (props) => (

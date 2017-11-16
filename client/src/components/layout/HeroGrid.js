@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import '../css/content.css';
+import './HeroGrid.css';
 
-export default class heroGrid extends Component {
+export default class HeroGrid extends Component {
   state = {heroes: []}
     
   componentDidMount() {
@@ -28,7 +28,7 @@ export default class heroGrid extends Component {
               (
                 <a key ={key} href={'heroes/' + item.localized_name }>
                     <div className="hero col-xs-4 col-sm-3 col-md-2 col-lg-1">
-                        <img className="img-responsive" src = {'https://api.opendota.com' + item.img }/>
+                        <img alt="hero portrait" className="img-responsive" src = {'https://api.opendota.com' + item.img }/>
                         <div className="title"> { item.localized_name } </div>
                     </div> 
                 </a>              
