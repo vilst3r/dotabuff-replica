@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import './HeroGrid.css';
 
+// proxy
+var proxyUrl = 'https://cors-anywhere.herokuapp.com/'
+var targetUrl = 'http://dota-matchup-analyzer-xbonk12.c9users.io:8081'
+
 export default class HeroGrid extends Component {
   state = {heroes: []}
     
   componentDidMount() {
-    var proxyUrl = 'https://cors-anywhere.herokuapp.com/'
-    var targetUrl = 'http://dota-matchup-analyzer-xbonk12.c9users.io:8081'
-    
     fetch(proxyUrl + targetUrl + '/heroes') // or whatever URL you want
       .then(response => response.json())
       .then(heroes => this.setState({ heroes }))
@@ -26,7 +27,7 @@ export default class HeroGrid extends Component {
           
             this.state.heroes.map((item, key) =>
               (
-                <a key ={key} href={'heroes/' + item.localized_name }>
+                <a key ={key} href={targetUrl + '/heroes/' + item.localized_name}>
                     <div className="hero col-xs-4 col-sm-3 col-md-2 col-lg-1">
                         <img alt="hero portrait" className="img-responsive" src = {'https://api.opendota.com' + item.img }/>
                         <div className="title"> { item.localized_name } </div>
