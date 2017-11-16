@@ -5,14 +5,16 @@ export default class heroGrid extends Component {
   state = {heroes: []}
     
   componentDidMount() {
-    fetch('heroes') // or whatever URL you want
+    var proxyUrl = 'https://cors-anywhere.herokuapp.com/'
+    var targetUrl = 'http://dota-matchup-analyzer-xbonk12.c9users.io:8081'
+    
+    fetch(proxyUrl + targetUrl + '/heroes') // or whatever URL you want
       .then(response => response.json())
       .then(heroes => this.setState({ heroes }))
   }    
     
   render(){ 
     return (
-      <div>
         <div className = "panel-body">
         {
             this.state.heroes.sort(function(a, b) {
@@ -34,7 +36,6 @@ export default class heroGrid extends Component {
             null
         }        
         </div>        
-      </div>
     )
   }
 }

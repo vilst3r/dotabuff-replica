@@ -5,7 +5,10 @@ export default class heroContent extends Component {
   state = {heroStat: []}
     
   componentDidMount() {
-    fetch('heroes') // or whatever URL you want
+    var proxyUrl = 'https://cors-anywhere.herokuapp.com/'
+    var targetUrl = 'http://dota-matchup-analyzer-xbonk12.c9users.io:8081'
+    
+    fetch(proxyUrl + targetUrl + '/heroes') // or whatever URL you want
       .then(response => response.json())
       .then(heroStat => this.setState({ heroStat }))
   }

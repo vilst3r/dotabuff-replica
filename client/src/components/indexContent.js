@@ -1,13 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import HeroGrid from './heroGrid'
 
 // Content component
-export default class indexContent extends Component {
-  render(){ 
-    return (
-      <div className="container">
-        <HeroGrid />
-      </div>
-    )
-  }
-}
+const indexContent = () => (
+  <div className="container">
+    <HeroGrid />
+  </div>  
+)
+export default indexContent
