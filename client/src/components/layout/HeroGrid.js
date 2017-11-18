@@ -3,23 +3,20 @@ import { Link } from 'react-router-dom';
 
 import './HeroGrid.css';
 
-// proxy
-var proxyUrl = 'https://cors-anywhere.herokuapp.com/'
-var targetUrl = 'http://dota-matchup-analyzer-xbonk12.c9users.io:8081'
-
 export default class HeroGrid extends Component {
   state = {heroes: []}
     
   componentDidMount() {
-    console.log("TEST")
-    fetch('http://dota-matchup-analyzer-xbonk12.c9users.io:8081' + '/heroes') // or whatever URL you want
+    var proxy = 'http://dota-matchup-analyzer-xbonk12.c9users.io:8081'
+    
+    fetch(proxy + '/heroes') // or whatever URL you want
       .then(response => response.json())
       .then(heroes => this.setState({ heroes }))
   }    
     
   render(){ 
     return (
-        <div className = "panel-body">
+        <div className="panel-body">
         {
           this.state.heroes.sort( (a, b) =>
             (a.localized_name < b.localized_name) ?
