@@ -11,7 +11,8 @@ export default class HeroGrid extends Component {
   state = {heroes: []}
     
   componentDidMount() {
-    fetch(proxyUrl + targetUrl + '/heroes') // or whatever URL you want
+    console.log("TEST")
+    fetch('http://dota-matchup-analyzer-xbonk12.c9users.io:8081' + '/heroes') // or whatever URL you want
       .then(response => response.json())
       .then(heroes => this.setState({ heroes }))
   }    
