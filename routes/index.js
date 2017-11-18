@@ -5,6 +5,16 @@ var heroes = require('../controllers/heroes.js');
 
 var opendota_api_root = 'https://api.opendota.com/api';
 
+var heroMap = [];
+
+rp(opendota_api_root + '/heroStats')
+    .then(response => JSON.parse(response))
+    .then(data => 
+        data.map((item, key)=> 
+            heroMap.push({id:item.id, name:item.localized_name}) 
+        )
+    )
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
@@ -16,6 +26,7 @@ router.get('/heroes', function(req, res, next) {
     .then(response => {
         var test = response;
         heroes.listHeroes(test, req, res);
+        
     })
 });
 
@@ -26,8 +37,13 @@ router.get('/heroes/:hero', function(req, res, next) {
         data.map((item, key) =>
             item.localized_name === req.params.hero ?
                 rp(opendota_api_root + '/heroes/' + item.id + '/matchups')
-                .then(matchups =>
-                    res.send(matchups)
+                .then(response => JSON.parse(response))
+                .then(test => {
+                    test.map((item,key) => {
+                        heroMap.map(a => a.id === item.hero_id? item.hero_name = a.name: null)
+                    })
+                    res.send(test)
+                }
                 )
             :
                 null

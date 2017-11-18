@@ -1,12 +1,13 @@
 import React from 'react';
-import HeroGrid from '../layout/HeroGrid'
-import NavBar from '../layout/NavBar'
+
+import Header from '../layout/Header'
+import Main from '../layout/Main'
 
 // Content component
 const App = () => (
   <div className="container">
-    <NavBar title={"DotA 2"} />
-    <HeroGrid />
-  </div>  
+    <Header title={"DotA 2"}/>
+    <Main />
+  </div>
 )
 export default App

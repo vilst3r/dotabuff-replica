@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+
 import './HeroGrid.css';
 
 // proxy
@@ -28,9 +30,9 @@ export default class HeroGrid extends Component {
             this.state.heroes.map((item, key) =>
               (
                 <div key ={key} className="hero col-xs-4 col-sm-3 col-md-2 col-lg-1">
-                    <a href={targetUrl + '/heroes/' + item.localized_name}>
+                    <Link to={'/heroes/' + item.localized_name}>
                       <img alt="hero portrait" className="img-responsive" src = {'https://api.opendota.com' + item.img }/>
-                    </a> 
+                    </Link>
                     <div className="title"> { item.localized_name } </div>
                 </div> 
               )
@@ -42,3 +44,4 @@ export default class HeroGrid extends Component {
     )
   }
 }
+                    // <a href={targetUrl + '/heroes/' + item.localized_name}>
