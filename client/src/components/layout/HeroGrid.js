@@ -27,12 +27,12 @@ export default class HeroGrid extends Component {
           
             this.state.heroes.map((item, key) =>
               (
-                <a key ={key} href={targetUrl + '/heroes/' + item.localized_name}>
-                    <div className="hero col-xs-4 col-sm-3 col-md-2 col-lg-1">
-                        <img alt="hero portrait" className="img-responsive" src = {'https://api.opendota.com' + item.img }/>
-                        <div className="title"> { item.localized_name } </div>
-                    </div> 
-                </a>              
+                <div key ={key} className="hero col-xs-4 col-sm-3 col-md-2 col-lg-1">
+                    <a href={targetUrl + '/heroes/' + item.localized_name}>
+                      <img alt="hero portrait" className="img-responsive" src = {'https://api.opendota.com' + item.img }/>
+                    </a> 
+                    <div className="title"> { item.localized_name } </div>
+                </div> 
               )
             )
           :
