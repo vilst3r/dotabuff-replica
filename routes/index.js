@@ -1,6 +1,14 @@
 var express = require('express');
 var router = express.Router();
-var rp = require('request-promise');
+
+// non-VHA env development
+// var rp = require('request-promise')
+
+// if developing on VHA device
+var rp = require('request-promise').defaults({
+    proxy: 'http://internet-proxy.dc.vodafone.com.au:8080'
+});
+
 var heroes = require('../controllers/heroes.js');
 
 var opendota_api_root = 'https://api.opendota.com/api';
