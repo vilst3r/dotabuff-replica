@@ -1,13 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-// non-VHA env development
-// var rp = require('request-promise')
-
-// if developing on VHA device
-var rp = require('request-promise').defaults({
-    proxy: 'http://internet-proxy.dc.vodafone.com.au:8080'
-});
+var rp = require('request-promise')
 
 var heroes = require('../controllers/heroes.js');
 
