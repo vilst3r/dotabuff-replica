@@ -7,11 +7,11 @@ export default class HeroGrid extends Component {
   state = {heroes: []}
     
   componentDidMount() {
-    
-    fetch('/heroes') // or whatever URL you want
+    fetch('/heroes') 
       .then(response => response.json())
-      .then(heroes => this.setState({ heroes }))
+      .then(data => this.setState({heroes : data.result.heroes}))
   }    
+  //console.log(data.result.heroes)
     
   render(){ 
     return (
@@ -28,7 +28,7 @@ export default class HeroGrid extends Component {
               (
                 <div key ={key} className="hero col-xs-4 col-sm-3 col-md-2 col-lg-1">
                     <Link to={'/heroes/' + item.localized_name}>
-                      <img alt="hero portrait" className="img-responsive" src = {'https://api.opendota.com' + item.img }/>
+                      <img alt="hero portrait" className="img-responsive" src = {item.icon_url} />
                     </Link>
                     <div className="title"> { item.localized_name } </div>
                 </div> 
