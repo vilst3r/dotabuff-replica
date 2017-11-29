@@ -11,24 +11,18 @@ export default class HeroGrid extends Component {
       .then(response => response.json())
       .then(data => this.setState({heroes : data.result.heroes}))
   }    
-  //console.log(data.result.heroes)
     
   render(){ 
     return (
         <div className="panel-body">
         {
-          this.state.heroes.sort( (a, b) =>
-            (a.localized_name < b.localized_name) ?
-              -1
-            :
-              (a.localized_name > b.localized_name) ? 1 : 0
-          ) ?
-          
+          this.state.heroes 
+          ?
             this.state.heroes.map((item, key) =>
               (
                 <div key ={key} className="hero col-xs-4 col-sm-3 col-md-2 col-lg-1">
                     <Link to={'/heroes/' + item.localized_name}>
-                      <img alt="hero portrait" className="img-responsive" src = {item.icon_url} />
+                      <img alt="hero portrait" className="img-responsive" src={item.icon_url} />
                     </Link>
                     <div className="title"> { item.localized_name } </div>
                 </div> 
@@ -41,4 +35,3 @@ export default class HeroGrid extends Component {
     )
   }
 }
-                    // <a href={targetUrl + '/heroes/' + item.localized_name}>

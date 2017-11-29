@@ -14,6 +14,15 @@ function capitalizeFirstLetter(string) {
     return string.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 }
 
+function sortHeroMap(map) {
+    map.sort( (a, b) =>
+    (a.localized_name < b.localized_name) ?
+      -1
+    :
+      (a.localized_name > b.localized_name) ? 1 : 0
+    )    
+}
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
@@ -47,29 +56,33 @@ router.get('/heroes', function(req, res, next) {
             hero = hero.replace(/_/gi, ' ')
             item.localized_name = capitalizeFirstLetter(hero)
         })
+        sortHeroMap(data.result.heroes)
+        heroMap = data.result.heroes;
         res.send(data)
     })    
 });
 
 router.get('/heroes/:hero', function(req, res, next) {
-    rp(opendota_api_root + '/heroes')
-    .then(response => JSON.parse(response))
-    .then(data => 
-        data.map((item, key) =>
-            item.localized_name === req.params.hero ?
-                rp(opendota_api_root + '/heroes/' + item.id + '/matchups')
-                .then(response => JSON.parse(response))
-                .then(test => {
-                    test.map((item,key) => {
-                        heroMap.map(a => a.id === item.hero_id? item.hero_name = a.name: null)
-                    })
-                    res.send(test)
-                }
-                )
-            :
-                null
-        )
-    )
+    
+    
+    // rp(opendota_api_root + '/heroes')
+    // .then(response => JSON.parse(response))
+    // .then(data => 
+    //     data.map((item, key) =>
+    //         item.localized_name === req.params.hero ?
+    //             rp(opendota_api_root + '/heroes/' + item.id + '/matchups')
+    //             .then(response => JSON.parse(response))
+    //             .then(test => {
+    //                 test.map((item,key) => {
+    //                     heroMap.map(a => a.id === item.hero_id? item.hero_name = a.name: null)
+    //                 })
+    //                 res.send(test)
+    //             }
+    //             )
+    //         :
+    //             null
+    //     )
+    // )
 })
 
 module.exports = router;
