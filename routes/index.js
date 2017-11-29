@@ -55,6 +55,7 @@ router.get('/heroes', function(req, res, next) {
             hero = hero.replace(/npc_dota_hero_/gi, '')
             hero = hero.replace(/_/gi, ' ')
             item.localized_name = capitalizeFirstLetter(hero)
+            item.localized_name === "Anti-mage" ? item.localized_name = "Anti-Mage" : null            
         })
         sortHeroMap(data.result.heroes)
         heroMap = data.result.heroes;
@@ -62,9 +63,16 @@ router.get('/heroes', function(req, res, next) {
     })    
 });
 
-router.get('/heroes/:hero', function(req, res, next) {
-    
-    
+router.get('/heroes/:heroName', function(req, res, next) {
+    if (heroMap.length !== 0) {
+        heroMap.map((item, key) =>
+            item.localized_name === req.params.heroName ?
+                res.send(item)
+            :
+                null
+        )
+    }
+
     // rp(opendota_api_root + '/heroes')
     // .then(response => JSON.parse(response))
     // .then(data => 
