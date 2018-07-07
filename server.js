@@ -1,54 +1,70 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var cors = require('cors')
+const config = require('./config');
 
-var index = require('./routes/index');
+/* Modules */
+const express = require('express');
+const logger = require('morgan');
+const path = require('path');
+const fs = require('fs');
+const chalk = require('chalk');
+const errorHandler = require('errorhandler');
+const bodyParser = require('body-parser');
+const favicon = require('serve-favicon');
+const cors = require('cors');
 
-var app = express();
+/* Routes */
+const index = require('./routes/index');
+const users = require('./routes/users');
 
+const app = express();
+
+/*
+  Express Configuration
+*/
+const logDate = new Date()
+app.set('host', config.app.host)
+app.set('port', config.app.port)
+app.set('env', config.app.env)
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+// app.set('views', path.join(__dirname, 'views'));
+// app.set('view engine', 'jade');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
+/*
+  Registering Middleware
+*/
+app.use(bodyParser.json());
+app.use(logger('common', {
+  stream: fs.createWriteStream('./log/log_' + logDate.getDate() + '-' + logDate.getMonth() + 1 + '-' + logDate.getFullYear() + '.log', {flags: 'a'})
+}));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
 // enabling cors
-var corsOptions = {
-  origin: 'http://localhost:8080',
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204 
+// app.use(cors({
+//   origin: 'http://localhost:8080',
+//   optionsSuccessStatus: 200         // some legacy browsers (IE11, various SmartTVs) choke on 204 
+// }))
+// app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+// app.use(express.static(path.join(__dirname, 'public')));
+
+/*
+  Loading Route Middleware
+*/
+app.use('/', index)
+app.use('/users', users)
+
+/*
+  Error Handler for development
+*/
+if (app.get('env') === 'development') {
+  app.use(errorHandler());
 }
-app.use(cors(corsOptions))
 
+/*
+  Start to listen for the Express server
+*/
+app.listen(config.app.port, () => {
+  console.log('App is running at http://localhost:%d in %s environment', app.get('port'), app.get('env'));
+  console.log('Press CTRL-C to stop\n');
+})
 
-// routing
-app.use('/', index);
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
-
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
-
-module.exports = app;
+module.exports = app

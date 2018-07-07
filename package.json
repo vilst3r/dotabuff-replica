@@ -1,24 +1,41 @@
 {
-  "name": "react-backend",
-  "version": "0.0.0",
-  "private": true,
+  "name": "dota-stuff",
+  "version": "1.0.0",
+  "description": "Full Stack (NodeJS REST + ReactJS) Application that analyses hero matchups similar to dotabuff",
+  "main": "server.js",
   "scripts": {
-    "start": "PORT=8081 node bin/www",
-    "startV2": "set PORT=8081 & node bin/www"
+    "start": "node ./node_modules/nodemon/bin/nodemon",
+    "test": "node ./node_modules/mocha/bin/mocha"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vilst3r/dota_matchup_analyzer.git"
+  },
+  "author": "Clifford Phan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vilst3r/dota_matchup_analyzer/issues"
+  },
+  "homepage": "https://github.com/vilst3r/dota_matchup_analyzer#readme",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.17.5",
+    "supertest": "^3.1.0"
+  },    
   "dependencies": {
-    "body-parser": "~1.18.2",
-    "cookie-parser": "~1.4.3",
-    "debug": "~2.6.9",
-    "express": "~4.15.5",
-    "jade": "~1.11.0",
-    "morgan": "~1.9.0",
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "debug": "^2.6.9",
+    "express": "^4.15.5",
+    "jade": "^1.11.0",
+    "morgan": "^1.9.0",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
-    "request": "~2.83.0",
-    "request-promise": "~4.2.2",
-    "serve-favicon": "~2.4.5",
-    "cors": "~2.8.4",
-    "dota2_web_api" : "~1.2.0"
+    "request": "^2.83.0",
+    "request-promise": "^4.2.2",
+    "serve-favicon": "^2.4.5",
+    "cors": "^2.8.4",
+    "dota2_web_api" : "^1.2.0"
   }
 }
