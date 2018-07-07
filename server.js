@@ -10,10 +10,11 @@ const errorHandler = require('errorhandler');
 const bodyParser = require('body-parser');
 const favicon = require('serve-favicon');
 const cors = require('cors');
+const dotaWebAPI = require('dota2_web_api');
 
 /* Routes */
 const index = require('./routes/index');
-const users = require('./routes/users');
+const heroes = require('./routes/heroes');
 
 const app = express();
 
@@ -24,10 +25,10 @@ const logDate = new Date()
 app.set('host', config.app.host)
 app.set('port', config.app.port)
 app.set('env', config.app.env)
+app.set('api', new dotaWebAPI(config.api.key))
 // view engine setup
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'jade');
-
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
 
 /*
   Registering Middleware
@@ -50,7 +51,7 @@ app.use(bodyParser.json());
   Loading Route Middleware
 */
 app.use('/', index)
-app.use('/users', users)
+app.use('/heroes', heroes)
 
 /*
   Error Handler for development
