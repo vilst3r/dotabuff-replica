@@ -23,7 +23,6 @@ const server = express()
 /**
  * Express configuration
  */
-const logDate = new Date()
 server.set('host', app.host)
 server.set('port', app.port)
 server.set('env', app.env)
@@ -36,7 +35,7 @@ server.set('view engine', 'jade');
 /**
  * Registering Middleware
  */
-server.use(bodyParser.json());
+const logDate = new Date()
 server.use(morgan('common', {
   stream: fs.createWriteStream(format('./log/%d-%d-%d.log', logDate.getDate(), logDate.getMonth() + 1, logDate.getFullYear()), {
     flags: 'a'
@@ -45,11 +44,6 @@ server.use(morgan('common', {
 server.use(morgan('dev'));
 server.use(bodyParser.json());
 
-// enabling cors
-server.use(cors({
-  origin: 'http://localhost:8080',
-  optionsSuccessStatus: 200         // some legacy browsers (IE11, various SmartTVs) choke on 204 
-}))
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 // app.use(express.static(path.join(__dirname, 'public')));
 
@@ -65,7 +59,6 @@ server.use('/heroes', heroes)
 if (app.env === 'development') {
   server.use(errorHandler());
 }
-
 
 /**
  * Start to listen for the Express server
