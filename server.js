@@ -5,15 +5,14 @@ import { app, api } from './config';
 import { dotaWebAPI } from 'dota2_web_api';
 import express from 'express';
 import morgan from 'morgan';
-import path from 'path';
 import fs from 'fs';
 import errorHandler from 'errorhandler';
 import bodyParser from 'body-parser';
 import { format } from 'util';
 
 /* Routes */
-import index from './routes/index';
-import heroes from './routes/heroes';
+import index from './controllers/indexController';
+import heroes from './controllers/heroController';
 
 /**
  * Express configuration

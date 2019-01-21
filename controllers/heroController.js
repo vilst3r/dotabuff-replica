@@ -1,8 +1,9 @@
-const rp = require('request-promise')
-
+import express from 'express';
 const heroServices = require('../services/heroes')
 
-const getHeroes = (req, res, next) => {
+const router = express.Router();
+
+router.get('/', (req, res, next) => {
 	req.app.get('api').getHeroes()
 	.then(data => res.status(200).json(data))
 	.catch(error => res.status(500).json({error: error}))
@@ -19,15 +20,12 @@ const getHeroes = (req, res, next) => {
 	//     heroServices.sortHeroMap(data.result.heroes)
 	//     res.send(data)
 	// })  
-}
+});
 
-const getHero = (req, res, next) => {
+router.get('/:heroId', (req, res, next) => {
 	req.app.get('api').getHeroes()
 	.then(data => res.status(200).json(data.result.heroes.filter(item => item.id == req.params.heroId)))
 	.catch(error => res.status(500).json({error: error}))
-}
+});
 
-module.exports = {
-	getHeroes: getHeroes,
-	getHero: getHero
-}
+module.exports = router;
