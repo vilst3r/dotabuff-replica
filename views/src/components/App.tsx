@@ -1,17 +1,17 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import Header from '../layout/Header'
+import Header from './Header'
 
-import HomePage from '../pages/Home'
-import HeroPage from '../pages/Hero'
+import LandingPage from './LandingPage'
+import HeroPage from './Heroes/Hero'
 
 const App = () => (
   <BrowserRouter>
     <div className="container">
       <Header title={"DotA 2"}/>
       <Switch>
-        <Route exact path='/' component={HomePage} />
+        <Route exact path='/' component={LandingPage} />
         <Route path='/heroes/:heroName' component={HeroPage}/>
       </Switch>
     </div>
