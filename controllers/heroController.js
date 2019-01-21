@@ -1,5 +1,6 @@
 import express from 'express';
-const heroServices = require('../services/heroes')
+
+import heroServices from '../services/heroes';
 
 const router = express.Router();
 

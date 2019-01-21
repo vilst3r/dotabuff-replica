@@ -1,8 +1,9 @@
-const express = require('express');
+import express from 'express';
+
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
-    console.log('Hello')
+    res.status(200).json('Hello World')
 })
 
 module.exports = router;
