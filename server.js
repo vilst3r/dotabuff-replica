@@ -7,30 +7,22 @@ import express from 'express';
 import morgan from 'morgan';
 import path from 'path';
 import fs from 'fs';
-import chalk from 'chalk';
 import errorHandler from 'errorhandler';
 import bodyParser from 'body-parser';
-import favicon from 'serve-favicon';
-import cors from 'cors';
 import { format } from 'util';
 
 /* Routes */
 import index from './routes/index';
 import heroes from './routes/heroes';
 
-const server = express()
-
 /**
  * Express configuration
  */
+const server = express()
 server.set('host', app.host)
 server.set('port', app.port)
 server.set('env', app.env)
 server.set('api', new dotaWebAPI(api.key))
-
-/* view engine setup */
-server.set('views', path.join(__dirname, 'views'));
-server.set('view engine', 'jade');
 
 /**
  * Registering Middleware
@@ -43,9 +35,6 @@ server.use(morgan('common', {
 }));
 server.use(morgan('dev'));
 server.use(bodyParser.json());
-
-// app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-// app.use(express.static(path.join(__dirname, 'public')));
 
 /**
  * Loading Route Middleware

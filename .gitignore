@@ -4,6 +4,7 @@
 /log
 /node_modules
 /views/node_modules
+/views/build/
 
 # testing
 /coverage
