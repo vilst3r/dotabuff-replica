@@ -2,9 +2,24 @@ import React, { Component } from 'react';
 
 import './Hero.css';
 
+interface Props {
+  history: any,
+  location: any,
+  match: any,
+  static: any
+}
+
+interface State {
+  heroStats: any,
+  componentError: string
+}
+
 // Content component
-export default class Hero extends Component {
-  state = {heroStats: []}
+export default class Hero extends Component<Props, State> {
+  state: State = {
+    heroStats: [],
+    componentError: ''
+  }
     
   componentDidMount() {  
     fetch('/heroes/' + this.props.match.params.heroName) // or whatever URL you want

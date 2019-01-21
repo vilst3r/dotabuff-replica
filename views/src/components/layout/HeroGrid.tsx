@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import './HeroGrid.css';
 
 export default class HeroGrid extends Component {
-  state = {heroes: []}
+  state = { heroes: [] }
     
   componentDidMount() {
     fetch('/heroes') 
@@ -17,18 +17,15 @@ export default class HeroGrid extends Component {
     return (
         <div className="panel-body">
         {
-          this.state.heroes 
-          ?
-            this.state.heroes.map((item, key) =>
-              (
+          this.state.heroes ?
+            this.state.heroes.map((hero: any , key: number) => (
                 <div key ={key} className="hero col-xs-4 col-sm-3 col-md-2 col-lg-1">
-                    <Link to={'/heroes/' + item.localized_name}>
-                      <img alt="hero portrait" className="img-responsive" src={item.icon_url} />
+                    <Link to={'/heroes/' + hero.localized_name}>
+                      <img alt="hero portrait" className="img-responsive" src={hero.icon_url} />
                     </Link>
-                    <div className="title"> { item.localized_name } </div>
+                    <div className="title"> { hero.localized_name } </div>
                 </div> 
-              )
-            )
+            ))
           :
             null
         }        
