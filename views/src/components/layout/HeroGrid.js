@@ -10,6 +10,7 @@ export default class HeroGrid extends Component {
     fetch('/heroes') 
       .then(response => response.json())
       .then(data => this.setState({heroes : data.result.heroes}))
+      .then(() => console.log(this.state.heroes))
   }    
     
   render(){ 

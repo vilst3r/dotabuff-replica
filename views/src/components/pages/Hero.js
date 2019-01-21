@@ -10,6 +10,7 @@ export default class Hero extends Component {
     fetch('/heroes/' + this.props.match.params.heroName) // or whatever URL you want
       .then(response => response.json())
       .then(data => this.setState({heroStats : data}))
+      .then(() => console.log(this.state.heroStats))
   }
 
   render(){ 
