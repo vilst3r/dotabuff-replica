@@ -1,17 +1,33 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { Hero } from '../models/Heroes/hero.model'
 
 import './LandingPage.css';
 
-export default class LandingPage extends Component {
-    state = { 
-        heroes: [] 
+interface Props {
+    history: any,
+    location: any,
+    match: any,
+    static: any
+}
+  
+interface State {
+heroes: Hero[],
+componentError: string
+}
+
+export default class LandingPage extends Component<Props, State> {
+    state: State = { 
+        heroes: [],
+        componentError: ''
     }
     
     componentDidMount() {
         fetch('/heroes') 
         .then(response => response.json())
-        .then(data => this.setState({heroes : data.result.heroes}))
+        .then(data => this.setState({
+            heroes: data.result.heroes
+        }))
         .then(() => console.log(this.state.heroes))
     }    
     
