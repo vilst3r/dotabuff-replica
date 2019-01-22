@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Hero } from '../models/Heroes/hero.model'
+import { Hero } from '../models/Heroes/hero.model';
+import ServerDown from './Error/ServerDown';
 
 import './LandingPage.css';
 
@@ -33,21 +34,24 @@ export default class LandingPage extends Component<Props, State> {
     
     render(){ 
         return (
-            <div className="panel-body">
-            {
-                this.state.heroes ?
-                    this.state.heroes.map((hero: Hero , key: number) => (
-                        <div key ={key} className="hero col-xs-4 col-sm-3 col-md-2 col-lg-1">
-                            <Link to={{pathname: '/heroes/' + hero.localized_name, state: {hero: hero}}}>
-                                <img alt="hero portrait" className="img-responsive" src={hero.icon_url} />
-                            </Link>
-                            <div className="title"> { hero.localized_name } </div>
-                        </div> 
-                    ))
-                :
-                    null
-            }        
-            </div>        
+            this.state.componentError === '' ?
+                <div className="panel-body">
+                {
+                    this.state.heroes ?
+                        this.state.heroes.map((hero: Hero , key: number) => (
+                            <div key ={key} className="hero col-xs-4 col-sm-3 col-md-2 col-lg-1">
+                                <Link to={{pathname: '/heroes/' + hero.localized_name, state: {hero: hero}}}>
+                                    <img alt="hero portrait" className="img-responsive" src={hero.icon_url} />
+                                </Link>
+                                <div className="title"> { hero.localized_name } </div>
+                            </div> 
+                        ))
+                    :
+                        null
+                }        
+                </div>        
+            :
+                <ServerDown />
         )
     }
 }
