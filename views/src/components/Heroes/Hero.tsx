@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ServerDown from '../Error/ServerDown';
 import './Hero.css';
 
 interface Props {
@@ -13,7 +14,6 @@ interface State {
   componentError: string
 }
 
-// Content component
 export default class Hero extends Component<Props, State> {
   state: State = {
     heroStats: [],
@@ -21,20 +21,19 @@ export default class Hero extends Component<Props, State> {
   }
     
   componentDidMount() {  
-    fetch('/heroes/' + this.props.match.params.heroName) // or whatever URL you want
-    .then(response => response.json())
-    .then(body => console.log(body))
-      // .then(data => this.setState({heroStats : data}))
-      // .then(() => console.log(this.state.heroStats))
+    console.log(this.props)
+    console.log(this.props.location.state)
   }
 
   render(){ 
     return (
-      <div className="container">
-        <h1 style={{color:'white'}}> {this.props.match.params.heroName} </h1>
-        <img alt="hero portrait" className="img-responsive hero-portrait" src={this.state.heroStats.icon_url} />
-        
-      </div>
+      this.state.componentError === '' && this.props.location.state ?
+        <div className="container">
+          <h1 style={{color:'white'}}> {this.props.location.state.localized_name} </h1>
+          <img alt="hero portrait" className="img-responsive hero-portrait" src={this.props.location.state.icon_url} />  
+        </div>
+      :
+        <ServerDown />
     )
   }
 }
