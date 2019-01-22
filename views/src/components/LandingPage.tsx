@@ -13,8 +13,8 @@ interface Props {
 }
   
 interface State {
-heroes: Hero[],
-componentError: string
+    heroes: Hero[],
+    componentError: string
 }
 
 export default class LandingPage extends Component<Props, State> {

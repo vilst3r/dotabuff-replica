@@ -21,7 +21,7 @@ const server = express()
 server.set('host', app.host)
 server.set('port', app.port)
 server.set('env', app.env)
-server.set('api', new dotaWebAPI(api.key))
+server.locals.api = new dotaWebAPI(api.key) 
 
 /**
  * Registering Middleware
