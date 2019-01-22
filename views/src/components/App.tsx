@@ -9,7 +9,7 @@ import HeroPage from './Heroes/Hero'
 const App = () => (
   <BrowserRouter>
     <div className="container">
-      <Header title={"DotA 2"}/>
+      <Header/>
       <Switch>
         <Route exact path='/' component={LandingPage} />
         <Route path='/heroes/:heroName' component={HeroPage}/>

@@ -36,9 +36,9 @@ export default class LandingPage extends Component<Props, State> {
             <div className="panel-body">
             {
                 this.state.heroes ?
-                    this.state.heroes.map((hero: any , key: number) => (
+                    this.state.heroes.map((hero: Hero , key: number) => (
                         <div key ={key} className="hero col-xs-4 col-sm-3 col-md-2 col-lg-1">
-                            <Link to={'/heroes/' + hero.localized_name}>
+                            <Link to={{pathname: '/heroes/' + hero.localized_name, state: {hero: hero}}}>
                                 <img alt="hero portrait" className="img-responsive" src={hero.icon_url} />
                             </Link>
                             <div className="title"> { hero.localized_name } </div>
