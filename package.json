@@ -4,8 +4,7 @@
   "description": "Full Stack (NodeJS + ReactJS) Application that analyses hero matchups similar to dotabuff",
   "main": "server.js",
   "scripts": {
-    "start": "babel-node server.js",
-    "test": "mocha ./test/app"
+    "start": "babel-node server.js"
   },
   "repository": {
     "type": "git",
@@ -21,9 +20,7 @@
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "chai": "^4.1.2",
-    "mocha": "^5.2.0",
-    "nodemon": "^1.17.5",
-    "supertest": "^3.1.0"
+    "mocha": "^5.2.0"
   },
   "dependencies": {
     "body-parser": "^1.18.2",
