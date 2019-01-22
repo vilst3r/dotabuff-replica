@@ -21,15 +21,16 @@ export default class Hero extends Component<Props, State> {
   }
     
   componentDidMount() {  
+    console.log(this.props)
     console.log(this.props.location.state)
   }
 
   render(){ 
     return (
-      this.state.componentError === '' ?
+      this.state.componentError === '' && this.props.location.state ?
         <div className="container">
-          <h1 style={{color:'white'}}> {this.props.location.state.hero.localized_name} </h1>
-          <img alt="hero portrait" className="img-responsive hero-portrait" src={this.props.location.state.hero.icon_url} />  
+          <h1 style={{color:'white'}}> {this.props.location.state.localized_name} </h1>
+          <img alt="hero portrait" className="img-responsive hero-portrait" src={this.props.location.state.icon_url} />  
         </div>
       :
         <ServerDown />
