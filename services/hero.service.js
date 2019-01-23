@@ -26,3 +26,7 @@ module.exports = {
 	capitalizeLocalisedName: capitalizeLocalisedName,
 	sortHeroMap: sortHeroMap
 }
+
+// class HeroService {
+	
+// }

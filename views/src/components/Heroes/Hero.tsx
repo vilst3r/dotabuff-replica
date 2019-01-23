@@ -30,8 +30,13 @@ export default class Hero extends Component<Props, State> {
     return (
       this.state.componentError === '' && this.props.location.state ?
         <div className="container text-center">
-          <h1 style={{color:'white'}}> {this.props.location.state.localized_name} </h1>
-          <img className="col-2" src={this.props.location.state.icon_url} alt="hero portrait"/> 
+          <div>
+            <h1 style={{color:'white'}}> {this.props.location.state.localized_name} </h1>
+          </div>
+          <div>
+            <img className="col-2" src={this.props.location.state.icon_url} alt="hero portrait"/> 
+          </div>
+          <HeroContent /> 
           <HeroContent /> 
         </div>
       :
