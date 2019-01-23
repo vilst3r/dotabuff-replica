@@ -29,9 +29,10 @@ class HeroService {
 	}
 }
 
+// Use for caching data
 const writeToDisk = (body) => {
 	const data = body.map(hero => ({name: hero.name, localized_name: hero.localized_name}))
-	fs.writeFile('heroes.json', JSON.stringify(data, null, 4), (() => console.log('error writing')))
+	fs.writeFile('cached_data/heroes.json', JSON.stringify(data, null, 4), (() => console.log('error writing')))
 }
 
 export default HeroService

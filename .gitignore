@@ -1,6 +1,7 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
 # dependencies
+/cached_data
 /log
 /node_modules
 /views/node_modules
