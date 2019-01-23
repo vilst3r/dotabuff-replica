@@ -6,7 +6,9 @@ const heroService = new HeroService()
 
 router.get('/', (req, res, next) => {
 	heroService.getHeroes(req.app.locals.api)
-	.then(data => {res.status(200).json(data)})
+	.then(data => {
+		console.log(data)
+		res.status(200).json(data)})
 	.catch(error => {res.status(500).json({error: error})})
 });
 
