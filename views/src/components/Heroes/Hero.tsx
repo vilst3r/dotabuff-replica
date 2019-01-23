@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import HeroContent from './HeroContent';
 import ServerDown from '../Error/ServerDown';
 import './Hero.css';
 
@@ -28,9 +29,10 @@ export default class Hero extends Component<Props, State> {
   render(){ 
     return (
       this.state.componentError === '' && this.props.location.state ?
-        <div className="container">
+        <div className="container text-center">
           <h1 style={{color:'white'}}> {this.props.location.state.localized_name} </h1>
-          <img alt="hero portrait" className="img-responsive hero-portrait" src={this.props.location.state.icon_url} />  
+          <img className="col-2" src={this.props.location.state.icon_url} alt="hero portrait"/> 
+          <HeroContent /> 
         </div>
       :
         <ServerDown />

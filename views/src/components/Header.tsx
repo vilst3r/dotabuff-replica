@@ -6,14 +6,20 @@ import './Header.css';
 // Header component
 const Header = () => (
     <header>
-        <nav className="navbar navbar-inverse">
-          <div className="container-fluid">
-            <div className="navbar-header">
-              <Link to="/" className="navbar-brand">Dotastuff</Link>
-            </div>
-            <ul className="nav navbar-nav">
-              <li className="active">
+        <nav className="navbar navbar-expand navbar-inverse dotastuff-nav-bar">
+          <div className="collapse navbar-collapse">
+            <ul className="navbar-nav mr-auto">
+              <li className="nav-item col">
                 <Link to="/">Home</Link>
+              </li>
+              <li className="nav-item col">
+                <Link to="/">Stats</Link>
+              </li>
+              <li className="nav-item col">
+                <Link to="/">Games</Link>
+              </li>
+              <li className="nav-item col">
+                <Link to="/">Random</Link>
               </li>
             </ul>
           </div>
