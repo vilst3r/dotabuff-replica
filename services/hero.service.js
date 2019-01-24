@@ -1,4 +1,5 @@
 import fs from 'fs'
+import cached_heroes from '../cached_data/heroes.json'
 
 class HeroService {
 	getHeroes(api) {
@@ -6,8 +7,7 @@ class HeroService {
 		.then(body => body.result.heroes.map(hero => {
 					hero.icon_url = api.getHeroIconPath(hero.name, "full.png");
 					hero.name = hero.name.replace(/npc_dota_hero_/g, '').replace(/_/g, ' ')
-					hero.localized_name = hero.name.replace(/npc_dota_hero_/g, '').replace(/_/g, ' ')
-						.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
+					hero.localized_name = cached_heroes.filter(item => item.name === hero.name)[0].localized_name
 					return hero      
 			})
 			.sort((a, b) => a.localized_name < b.localized_name ? -1 : a.localized_name == b.localized_name ? 0 : 1)
@@ -21,8 +21,8 @@ class HeroService {
 		.then(hero => hero[0])
 		.then(hero => {
 			hero.icon_url = api.getHeroIconPath(hero.name, "full.png")
-			hero.localized_name = hero.name.replace(/npc_dota_hero_/g, '').replace(/_/g, ' ')
-				.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
+			hero.name = hero.name.replace(/npc_dota_hero_/g, '').replace(/_/g, ' ')
+			hero.localized_name = cached_heroes.filter(item => item.name === hero.name)[0].localized_name
 			return hero
 		})
 		.catch(error => error)
