@@ -1,18 +1,36 @@
 import fs from 'fs'
-import cached_heroes from '../cached_data/heroes.json'
 
 class HeroService {
 	getHeroes(api) {
-		return api.getHeroes()
-		.then(body => body.result.heroes.map(hero => {
+		try {
+			const result = fs.readFileSync('cached_data/heroes.json')
+			return new Promise((resolve) => resolve(JSON.parse(result)))
+		} catch(err) {
+			console.log("Writing data to cache directory")
+
+			return api.getHeroes()
+			.then(({result: {heroes}}) => 
+				heroes.map(hero => {
 					hero.icon_url = api.getHeroIconPath(hero.name, "full.png");
 					hero.name = hero.name.replace(/npc_dota_hero_/g, '').replace(/_/g, ' ')
-					hero.localized_name = cached_heroes.filter(item => item.name === hero.name)[0].localized_name
+					hero.localized_name = hero.name.replace(/npc_dota_hero_/g, '').replace(/_/g, ' ')
+						.split(' ').map(word => 
+							word.charAt(0).toUpperCase() + word.slice(1)
+						)
+						.join(' ')
 					return hero      
+				})
+				.sort((a, b) => a.localized_name < b.localized_name ? -1 : a.localized_name == b.localized_name ? 0 : 1)
+			)
+			.then(heroes => {
+				fs.writeFile('cached_data/heroes.json', 
+					JSON.stringify(heroes, null, 4), 
+					(err => err ? console.log(err) : null)
+				)
+				return heroes
 			})
-			.sort((a, b) => a.localized_name < b.localized_name ? -1 : a.localized_name == b.localized_name ? 0 : 1)
-		)
-		.catch(error => error)
+			.catch(error => error)
+		}
 	}
 
 	getHero(api, heroId) {
@@ -22,7 +40,10 @@ class HeroService {
 		.then(hero => {
 			hero.icon_url = api.getHeroIconPath(hero.name, "full.png")
 			hero.name = hero.name.replace(/npc_dota_hero_/g, '').replace(/_/g, ' ')
-			hero.localized_name = cached_heroes.filter(item => item.name === hero.name)[0].localized_name
+			hero.localized_name = hero.name.replace(/npc_dota_hero_/g, '').replace(/_/g, ' ')
+					.split(' ').map(word => 
+						word.charAt(0).toUpperCase() + word.slice(1)
+					).join(' ')
 			return hero
 		})
 		.catch(error => error)
