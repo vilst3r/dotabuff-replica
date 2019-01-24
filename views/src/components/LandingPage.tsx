@@ -13,7 +13,7 @@ interface Props {
 }
   
 interface State {
-    heroes: Hero[],
+    heroes: any,
     componentError: string
 }
 
@@ -27,7 +27,10 @@ export default class LandingPage extends Component<Props, State> {
         fetch('/heroes') 
         .then(response => response.json())
         .then(data => this.setState({
-            heroes: data.result.heroes
+            heroes: Object.values(data).sort((a: any, b: any) => a.localized_name < b.localized_name ? 
+                -1 : a.localized_name === b.localized_name ?
+                    0 : 1
+            )
         }))
         .then(() => console.log(this.state.heroes))
         .catch(error => 

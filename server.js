@@ -11,8 +11,8 @@ import bodyParser from 'body-parser';
 import { format } from 'util';
 
 /* Routes */
-import index from './controllers/indexController';
-import heroes from './controllers/heroController';
+import IndexController from './controllers/index.controller';
+import HeroController from './controllers/hero.controller';
 
 /**
  * Express configuration
@@ -38,8 +38,8 @@ server.use(bodyParser.json());
 /**
  * Loading Route Middleware
  */
-server.use('/', index)
-server.use('/heroes', heroes)
+server.use('/', IndexController)
+server.use('/heroes', HeroController)
 
 /**
  * Error Handler for development 

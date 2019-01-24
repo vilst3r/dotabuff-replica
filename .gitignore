@@ -2,6 +2,7 @@
 
 # dependencies
 /log
+/cached_data
 /node_modules
 /views/node_modules
 /views/build/
