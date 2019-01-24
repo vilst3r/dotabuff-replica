@@ -27,6 +27,7 @@ server.locals.api = new dotaWebAPI(api.key)
  * Registering Middleware
  */
 const logDate = new Date()
+fs.mkdir('log', err => err ? console.log('Writing directory failed!\n' + err) : null)
 server.use(morgan('common', {
   stream: fs.createWriteStream(format('./log/%d-%d-%d.log', logDate.getDate(), logDate.getMonth() + 1, logDate.getFullYear()), {
     flags: 'a'
