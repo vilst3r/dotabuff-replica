@@ -23,9 +23,10 @@ class HeroService {
 				.sort((a, b) => a.localized_name < b.localized_name ? -1 : a.localized_name == b.localized_name ? 0 : 1)
 			)
 			.then(heroes => {
+				fs.mkdir('cached_data', err => err ? console.log('Writing directory failed!\n' + err) : null)
 				fs.writeFile('cached_data/heroes.json', 
 					JSON.stringify(heroes, null, 4), 
-					(err => err ? console.log(err) : null)
+					(err => err ? console.log('Writing file failed!\n' + err) : null)
 				)
 				return heroes
 			})
