@@ -2,7 +2,7 @@
 import { app, api } from './config';
 
 /* Modules */
-import { dotaWebAPI } from 'dota2_web_api';
+import DotaWebAPI from 'dota-web-api';
 import express from 'express';
 import morgan from 'morgan';
 import fs from 'fs';
@@ -21,7 +21,7 @@ const server = express()
 server.set('host', app.host)
 server.set('port', app.port)
 server.set('env', app.env)
-server.locals.api = new dotaWebAPI(api.key) 
+server.locals.api = new DotaWebAPI(api.key)
 
 /**
  * Registering Middleware
@@ -43,7 +43,7 @@ server.use('/', IndexController)
 server.use('/heroes', HeroController)
 
 /**
- * Error Handler for development 
+ * Error Handler for development
  */
 if (app.env === 'development') {
   server.use(errorHandler());
